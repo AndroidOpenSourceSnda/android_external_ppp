@@ -82,6 +82,11 @@ void (*ip_down_hook) __P((void)) = NULL;
 /* Hook for a plugin to choose the remote IP address */
 void (*ip_choose_hook) __P((u_int32_t *)) = NULL;
 
+#ifdef STE_HARDWARE
+/* Hook for a plugin to set the dns addresses */
+int (*dns_set_hook) __P((u_int32_t *)) = NULL;
+#endif
+
 /* Notifiers for when IPCP goes up and down */
 struct notifier *ip_up_notifier = NULL;
 struct notifier *ip_down_notifier = NULL;
@@ -696,6 +701,10 @@ ipcp_resetci(f)
 	    wo->accept_remote = 0;
 	}
     }
+#ifdef STE_HARDWARE
+    if (dns_set_hook)
+        dns_set_hook(&ao->dnsaddr[0]);
+#endif
     BZERO(&ipcp_hisoptions[f->unit], sizeof(ipcp_options));
 }
 

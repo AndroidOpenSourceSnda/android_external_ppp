@@ -27,12 +27,14 @@ LOCAL_SRC_FILES:= \
 	pppox.c
 
 LOCAL_SHARED_LIBRARIES := \
-	libcutils libcrypto
+	libcutils libcrypto libdl
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/include
 
-LOCAL_CFLAGS := -DANDROID_CHANGES -DCHAPMS=1 -DMPPE=1 -Iexternal/openssl/include
+LOCAL_CFLAGS := -DANDROID_CHANGES -DPLUGIN -DCHAPMS=1 -DMPPE=1 -Iexternal/openssl/include
+
+LOCAL_LDFLAGS := -Wl,-E
 
 LOCAL_MODULE:= pppd
 

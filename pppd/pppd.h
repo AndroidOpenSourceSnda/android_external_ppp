@@ -709,6 +709,9 @@ extern int (*allowed_address_hook) __P((u_int32_t addr));
 extern void (*ip_up_hook) __P((void));
 extern void (*ip_down_hook) __P((void));
 extern void (*ip_choose_hook) __P((u_int32_t *));
+#ifdef STE_HARDWARE
+extern int (*dns_set_hook) __P((u_int32_t *));
+#endif
 
 extern int (*chap_check_hook) __P((void));
 extern int (*chap_passwd_hook) __P((char *user, char *passwd));
